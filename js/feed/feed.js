@@ -1,4 +1,4 @@
-import { API_SOCIAL } from "../api/api.js";
+import { API_SOCIAL, API_KEY } from "../api/api.js";
 
 const token = localStorage.getItem("token");
 
@@ -13,10 +13,12 @@ async function getPosts() {
     const response = await fetch(API_SOCIAL.posts, {
       headers: {
         Authorization: `Bearer ${token}`,
-      },
+        "X-Noroff-API-Key": API_KEY,
+},
     });
 
     const data = await response.json();
+    console.log(data); // la oss se hva API-et faktisk returnerer
     displayPosts(data.data);
   } catch (error) {
     console.error("Error fetching posts:", error);
