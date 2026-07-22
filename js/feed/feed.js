@@ -10,7 +10,7 @@ if (!token) {
 // Fetch and display all posts
 async function getPosts() {
   try {
-    const response = await fetch(API_SOCIAL.posts, {
+    const response = await fetch(API_SOCIAL.posts + "?_author=true", {
       headers: {
         Authorization: `Bearer ${token}`,
         "X-Noroff-API-Key": API_KEY,
@@ -42,3 +42,37 @@ function displayPosts(posts) {
 }
 
 getPosts();
+
+const logoutBtn = document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.href = "index.html";
+});
+
+const createPostForm = document.getElementById("createPostForm");
+createPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const title = document.getElementById("postTitle").value;
+    const body = document.getElementById("postBody").value;
+
+    try {
+        const response = await fetch(API_SOCIAL.posts, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+                "X-Noroff-API-Key": API_KEY,
+            },
+            body: JSON.stringify({ title, body }),
+        });
+
+        if (response.ok) {
+            getPosts();
+            createPostForm.reset();
+        }
+    } catch (error) {
+        console.error("Error creating post:", error);
+    }
+});
