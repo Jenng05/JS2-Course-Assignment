@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Social Feed</h1>
+      <nav>
+        <a href="profile.html">My Profile</a>
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>Create Post</h2>
+        <form id="createPostForm">
+          <input type="text" id="postTitle" placeholder="Post title" required />
+          <textarea id="postBody" placeholder="What's on your mind?"></textarea>
+          <button type="submit">Post</button>
+        </form>
+      </section>
+
+      <section>
+        <input type="search" id="searchInput" placeholder="Search posts..." />
+        <div id="postsContainer"></div>
+      </section>
+    </main>
+  </body>
+</html>

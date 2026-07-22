@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="feed.html">← Back to Feed</a>
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <article id="postContainer">
+        <!-- Post will be loaded here -->
+      </article>
+
+      <section id="editPostSection">
+        <h2>Edit Post</h2>
+        <form id="editPostForm">
+          <input type="text" id="editTitle" placeholder="Post title" required />
+          <textarea id="editBody" placeholder="Post content"></textarea>
+          <button type="submit">Save Changes</button>
+        </form>
+        <button id="deletePostBtn">Delete Post</button>
+      </section>
+    </main>
+  </body>
+</html>
