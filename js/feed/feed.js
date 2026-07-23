@@ -35,7 +35,7 @@ function displayPosts(posts) {
       <div class="post">
         <h3><a href="post.html?id=${post.id}">${post.title}</a></h3>
         <p>${post.body || ""}</p>
-        <p>By: ${post.author?.name || "Unknown"}</p>
+        <p>By: <a href="profile.html?user=${post.author?.name}">${post.author?.name || "Unknown"}</a></p>
       </div>
     `;
   });
@@ -74,5 +74,23 @@ createPostForm.addEventListener("submit", async (event) => {
         }
     } catch (error) {
         console.error("Error creating post:", error);
+    }
+});
+
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", async (event) => {
+    const query = event.target.value;
+    
+    if (query.length > 2) {
+        const response = await fetch(`${API_SOCIAL.posts}/search?q=${query}&_author=true`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "X-Noroff-API-Key": API_KEY,
+            },
+        });
+        const data = await response.json();
+        displayPosts(data.data);
+    } else if (query.length === 0) {
+        getPosts();
     }
 });

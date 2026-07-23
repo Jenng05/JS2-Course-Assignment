@@ -1,6 +1,8 @@
 import { API_SOCIAL, API_KEY } from "../api/api.js";
 
 const token = localStorage.getItem("token");
+const params = new URLSearchParams(window.location.search);
+const profileUser = params.get("user") || localStorage.getItem("username");
 const username = localStorage.getItem("username");
 
 if (!token) {
@@ -9,7 +11,7 @@ if (!token) {
 
 async function getProfile() {
     try {
-        const response = await fetch(`${API_SOCIAL.profiles}/${username}?_posts=true`, {
+        const response = await fetch(`${API_SOCIAL.profiles}/${profileUser}?_posts=true&_followers=true`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "X-Noroff-API-Key": API_KEY,
@@ -31,6 +33,7 @@ function displayProfile(profile) {
         <p>Followers: ${profile._count?.followers || 0}</p>
         <p>Following: ${profile._count?.following || 0}</p>
         <p>Posts: ${profile._count?.posts || 0}</p>
+        ${profileUser !== username ? `<button id="followBtn">Follow</button>` : ""}
     `;
 
     const postsContainer = document.getElementById("userPostsContainer");
@@ -52,3 +55,24 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("username");
     window.location.href = "index.html";
 });
+
+const followBtn = document.getElementById("followBtn");
+if (followBtn) {
+    followBtn.addEventListener("click", async () => {
+        try {
+            const response = await fetch(`${API_SOCIAL.profiles}/${profileUser}/follow`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "X-Noroff-API-Key": API_KEY,
+                },
+            });
+
+            if (response.ok) {
+                alert(`You are now following ${profileUser}!`);
+            }
+        } catch (error) {
+            console.error("Error following user:", error);
+        }
+    });
+}
