@@ -8,6 +8,10 @@ if (!token) {
 }
 
 // Fetch and display all posts
+/**
+ * Fetches all posts from the API and displays them
+ * @returns {Promise<void>}
+ */
 async function getPosts() {
   try {
     const response = await fetch(API_SOCIAL.posts + "?_author=true", {
