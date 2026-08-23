@@ -22,7 +22,6 @@ async function getPosts() {
     });
 
     const data = await response.json();
-    console.log(data); // la oss se hva API-et faktisk returnerer
     displayPosts(data.data);
   } catch (error) {
     console.error("Error fetching posts:", error);
