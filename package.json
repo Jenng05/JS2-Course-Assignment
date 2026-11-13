@@ -1,0 +1,24 @@
+{
+  "name": "js2-course-assignment",
+  "version": "1.0.0",
+  "description": "A social media application built with vanilla JavaScript and the Noroff API.",
+  "main": "index.js",
+  "scripts": {
+  "dev": "tailwindcss -i ./css/tailwind.css -o ./css/output.css --watch",
+  "build": "tailwindcss -i ./css/tailwind.css -o ./css/output.css --minify"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jenng05/JS2-Course-Assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jenng05/JS2-Course-Assignment/issues"
+  },
+  "homepage": "https://github.com/Jenng05/JS2-Course-Assignment#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

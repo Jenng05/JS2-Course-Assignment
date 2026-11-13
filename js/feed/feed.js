@@ -35,10 +35,10 @@ function displayPosts(posts) {
 
   posts.forEach((post) => {
     container.innerHTML += `
-      <div class="post">
-        <h3><a href="post.html?id=${post.id}">${post.title}</a></h3>
-        <p>${post.body || ""}</p>
-        <p>By: <a href="profile.html?user=${post.author?.name}">${post.author?.name || "Unknown"}</a></p>
+      <div class="bg-white p-6 rounded-lg shadow mb-4 break-words">
+        <h3 class="text-xl font-bold mb-2"><a href="post.html?id=${post.id}" class="hover:underline">${post.title}</a></h3>
+        <p class="text-gray-700 mb-2">${post.body || ""}</p>
+        <p class="text-sm text-gray-500">By: <a href="profile.html?user=${post.author?.name}" class="text-blue-500 hover:underline">${post.author?.name || "Unknown"}</a></p>
       </div>
     `;
   });
